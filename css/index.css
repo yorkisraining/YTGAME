@@ -1,0 +1,75 @@
+html,
+body {
+    height: 100%;
+    font-family: '微软雅黑';
+}
+
+#container {
+    max-width: calc(1366px / 2);
+    margin: 0 auto;
+    height: 100%;
+    background-color: #F2F2F2;
+    position: relative;
+}
+
+
+/* plane */
+
+#plane {
+    width: 30px;
+    height: 30px;
+    background-color: #FF647E;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5%;
+}
+
+
+/* monster */
+
+.monster {
+    width: 15px;
+    height: 30px;
+    background-color: #014E5A;
+    position: absolute;
+}
+
+
+/* bullet */
+
+.bullet {
+    width: 8px;
+    height: 20px;
+    background-color: #F4DFA0;
+    position: absolute;
+    border-radius: 10px;
+}
+
+
+/* 分数 */
+
+.score_wrap {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 22px;
+    z-index: 19950606;
+    font-weight: bold;
+}
+
+#score {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+
+/* 一些操作按钮 */
+
+#reload {
+    position: absolute;
+    z-index: 19950606;
+    left: 10px;
+    top: 10px;
+    font-size: 16px;
+}

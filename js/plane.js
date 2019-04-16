@@ -14,31 +14,34 @@ let planeOffset = {}; //暴露的变量，飞机的坐标
     }
 
     CONTAINER.addEventListener('mousemove', (e) => {
-        let mouseX = e.clientX,
-            containW = CONTAINER.clientWidth - PLANE.offsetWidth;
-        containX = mouseX - CONTAINER.offsetLeft;
-        if (containX < 0) {
-            containX = 0;
-        } else if (containX > containW) {
-            containX = containW;
+        if (!pause) {
+            let mouseX = e.clientX,
+                containW = CONTAINER.clientWidth - PLANE.offsetWidth;
+            containX = mouseX - CONTAINER.offsetLeft;
+            if (containX < 0) {
+                containX = 0;
+            } else if (containX > containW) {
+                containX = containW;
+            }
+            planeOffset.x = containX;
+            movePlane(containX);
         }
-        planeOffset.x = containX;
-        movePlane(containX);
     })
 
     CONTAINER.addEventListener('touchmove', (e) => {
-        e = e.targetTouches[0];
-        let mouseX = e.clientX,
-            containW = CONTAINER.clientWidth - PLANE.offsetWidth;
-        containX = mouseX - CONTAINER.offsetLeft - PLANE.offsetWidth / 2;
-        console.log(CONTAINER.offsetLeft)
-        if (containX < 0) {
-            containX = 0;
-        } else if (containX > containW) {
-            containX = containW;
+        if (!pause) {
+            e = e.targetTouches[0];
+            let mouseX = e.clientX,
+                containW = CONTAINER.clientWidth - PLANE.offsetWidth;
+            containX = mouseX - CONTAINER.offsetLeft - PLANE.offsetWidth / 2;
+            if (containX < 0) {
+                containX = 0;
+            } else if (containX > containW) {
+                containX = containW;
+            }
+            planeOffset.x = containX;
+            movePlane(containX);
         }
-        planeOffset.x = containX;
-        movePlane(containX);
     })
 
 })()

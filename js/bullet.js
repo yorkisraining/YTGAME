@@ -32,32 +32,63 @@ let bulletOffset = new Map(); //暴露的变量，子弹的坐标
         })
 
         /* 超出屏幕清除掉那个子弹 */
-        let INTERTIMER = setInterval(() => {
-            if (thisY > 0) {
-                thisY -= 10;
-                ele.style.top = thisY + 'px';
-                bulletOffset.get(THISID).y = thisY;
-                let flag = ifBulletImpactMonster(THISX, thisY);
-                if (flag) {
+        /* let INTERTIMER = setInterval(() => {
+            if (!pause) {
+                if (thisY > 0) {
+                    thisY -= 10;
+                    ele.style.top = thisY + 'px';
+                    bulletOffset.get(THISID).y = thisY;
+                    let flag = ifBulletImpactMonster(THISX, thisY);
+                    if (flag) {
+                        clearInterval(INTERTIMER);
+                        CONTAINER.removeChild(ele);
+                        CONTAINER.removeChild(document.querySelector('.monster[data-id="' + flag + '"]'));
+                        bulletOffset.delete(THISID);
+                    }
+                } else {
                     clearInterval(INTERTIMER);
                     CONTAINER.removeChild(ele);
-                    CONTAINER.removeChild(document.querySelector('.monster[data-id="' + flag + '"]'));
                     bulletOffset.delete(THISID);
                 }
-            } else {
-                clearInterval(INTERTIMER);
-                CONTAINER.removeChild(ele);
-                bulletOffset.delete(THISID);
             }
-        }, 50);
+        }, 50); */
+        const INTERTIMERFN = () => {
+            let INTERTIMER = setTimeout(() => {
+                if (!pause) {
+                    if (thisY > 0) {
+                        thisY -= 10;
+                        ele.style.top = thisY + 'px';
+                        bulletOffset.get(THISID).y = thisY;
+                        let flag = ifBulletImpactMonster(THISX, thisY);
+                        if (flag) {
+                            clearInterval(INTERTIMER);
+                            CONTAINER.removeChild(ele);
+                            CONTAINER.removeChild(document.querySelector('.monster[data-id="' + flag + '"]'));
+                            bulletOffset.delete(THISID);
+                        } else {
+                            INTERTIMERFN();
+                        }
+                    } else {
+                        clearInterval(INTERTIMER);
+                        CONTAINER.removeChild(ele);
+                        bulletOffset.delete(THISID);
+                    }
+                } else {
+                    INTERTIMERFN();
+                }
+            }, 50)
+        }
+        INTERTIMERFN();
     }
 
-    let planeWidth = 30,
+    const planeWidth = 30,
         bulletWidth = 10;
-    let bulletTimer = setInterval(() => {
-        let bullet = createBullet(planeOffset.x + planeWidth / 2 - bulletWidth / 2),
-            ele = bullet.ele,
-            x = bullet.x;
-        moveBullet(ele, x);
+    setInterval(() => {
+        if (!pause) {
+            let bullet = createBullet(planeOffset.x + planeWidth / 2 - bulletWidth / 2),
+                ele = bullet.ele,
+                x = bullet.x;
+            moveBullet(ele, x);
+        }
     }, 250);
 })()

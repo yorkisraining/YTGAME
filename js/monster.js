@@ -21,22 +21,49 @@ let monsterOffset = new Map(); //暴露的变量，小怪兽的坐标
             y: thisY
         })
 
-        /* 超出屏幕清楚调那个小怪兽 */
-        let INTERTIMER = setInterval(() => {
-            if (monsterOffset.get(THISID)) {
-                if (thisY < CONTAINERHEIGHT - MONSTERHEIGHT) {
-                    thisY += 5;
-                    ele.style.top = thisY + 'px';
-                    monsterOffset.get(THISID).y = thisY;
+        /* 超出屏幕清除掉那个小怪兽 */
+        /* let INTERTIMER = setInterval(() => {
+            if (!pause) {
+                if (monsterOffset.get(THISID)) {
+                    if (thisY < CONTAINERHEIGHT - MONSTERHEIGHT) {
+                        thisY += 5;
+                        ele.style.top = thisY + 'px';
+                        monsterOffset.get(THISID).y = thisY;
+                        ifMonsterImpacePlane(THISX, thisY);
+                    } else {
+                        clearInterval(INTERTIMER);
+                        CONTAINER.removeChild(ele);
+                        bulletOffset.delete(THISID);
+                    }
                 } else {
                     clearInterval(INTERTIMER);
-                    CONTAINER.removeChild(ele);
-                    bulletOffset.delete(THISID);
                 }
-            } else {
-                clearInterval(INTERTIMER);
             }
-        }, 50);
+        }, 50); */
+        const INTERTIMERFN = () => {
+            let INTERTIMER = setTimeout(() => {
+                if (!pause) {
+                    if (monsterOffset.get(THISID)) {
+                        if (thisY < CONTAINERHEIGHT - MONSTERHEIGHT) {
+                            thisY += 5;
+                            ele.style.top = thisY + 'px';
+                            monsterOffset.get(THISID).y = thisY;
+                            ifMonsterImpacePlane(THISX, thisY);
+                            INTERTIMERFN();
+                        } else {
+                            clearTimeout(INTERTIMER);
+                            CONTAINER.removeChild(ele);
+                            bulletOffset.delete(THISID);
+                        }
+                    } else {
+                        clearTimeout(INTERTIMER);
+                    }
+                } else {
+                    INTERTIMERFN();
+                }
+            }, 50)
+        }
+        INTERTIMERFN();
     }
 
     /* 创建一个小怪兽dom */
@@ -49,13 +76,10 @@ let monsterOffset = new Map(); //暴露的变量，小怪兽的坐标
     }
 
     /* 500ms创建一个小怪兽 */
-    /* 以后改成随意ms */
-    let gameTimer = null;
-    setTimeout(() => {
-        gameTimer = setInterval(() => {
+    setInterval(() => {
+        if (!pause) {
             let ele = createMonster();
             moveMonsterFn(ele);
-        }, 1000);
-    }, 500);
-
+        }
+    }, 800);
 })()

@@ -14,8 +14,25 @@
 <body>
     <div id="container">
         <div class="score_wrap"><span id="score">0</span>分</div>
-        <div id="reload"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+        <div id="controll_group">
+            <div id="reload" class="controll_btn reload"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+            <div id="pause" class="controll_btn"><i class="fa fa-pause" aria-hidden="true"></i></div>
+            <div id="setting" class="controll_btn"><i class="fa fa-cog" aria-hidden="true"></i></div>
+        </div>
         <div id="plane"></div>
+        <div id="shade"></div>
+        <div id="pause_layer">
+            <div class="pause_btn_item" id="continue">继续</div>
+            <div class="pause_btn_item reload">重新开始</div>
+            <div class="pause_btn_item history">历史记录</div>
+            <div class="pause_btn_item rank_list">排行榜</div>
+        </div>
+        <div id="gameover">
+            <div class="over_msg">游戏结束！得分<span id="game_result"></span></div>
+            <div class="pause_btn_item reload">重新开始</div>
+            <div class="pause_btn_item history">历史记录</div>
+            <div class="pause_btn_item rank_list">排行榜</div>
+        </div>
     </div>
 
     <script src="static/js/rain.js"></script>

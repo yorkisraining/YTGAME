@@ -66,10 +66,85 @@ body {
 
 /* 一些操作按钮 */
 
-#reload {
+#controll_group {
     position: absolute;
-    z-index: 19950606;
+    z-index: 19930928;
     left: 10px;
     top: 10px;
     font-size: 16px;
+}
+
+.controll_btn {
+    display: inline-block;
+    margin-right: 6px;
+    cursor: pointer;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+}
+
+.controll_btn:hover {
+    opacity: .7;
+}
+
+#shade {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    z-index: 19940930;
+    visibility: hidden;
+}
+
+#shade.on {
+    visibility: visible;
+}
+
+#pause_layer,
+#gameover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 19950606;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    visibility: hidden;
+    text-align: center;
+}
+
+.pause_btn_item {
+    width: 150px;
+    height: 30px;
+    border: 1px solid #014E5A;
+    border-radius: 3px;
+    background-color: white;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 auto 10px;
+    cursor: pointer;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+}
+
+.pause_btn_item:hover {
+    opacity: .7;
+}
+
+#pause_layer.on,
+#gameover.on {
+    visibility: visible;
+}
+
+.over_msg {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#game_result {
+    display: inline-block;
+    padding-left: 4px;
+    font-size: 22px;
+    font-weight: bold;
 }

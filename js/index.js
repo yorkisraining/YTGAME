@@ -1,11 +1,14 @@
-// window 失去焦点 游戏暂停
-window.onblur = function() {};
-
-// window 获得焦点 
-window.onfocus = function() {}
+const CONTAINER = document.querySelector('#container'),
+    CONTAINERHEIGHT = CONTAINER.offsetHeight,
+    CONTAINERWIDTH = CONTAINER.offsetWidth,
+    MONSTERWIDTH = 45,
+    MONSTERHEIGHT = 45,
+    BULLETWIDTH = 20,
+    BULLETHEIGHT = 20,
+    PLANEWIDTH = 40,
+    PLANEHEIGHT = 40;
 
 // 分数
-
 let score = 0,
     scoreEle = document.querySelector('#score');
 const updateScore = () => {
@@ -15,11 +18,6 @@ const updateScore = () => {
 
 // 查找某颗子弹是否碰到小怪兽,先计算x值，再计算y值
 const ifBulletImpactMonster = (x, y) => {
-    const BULLETWIDTH = 10,
-        MONSTERWIDTH = 15,
-        MONSTERHEIGHT = 30;
-
-    let deletMonsterId = '';
     for (let [key, data] of monsterOffset) {
         //子弹最右边大于等于小怪兽最左边，并且子弹最左边小于等于小怪兽最右边，那么这俩个在x轴会相遇
         if (x + BULLETWIDTH >= data.x && x <= data.x + MONSTERWIDTH) {
@@ -37,9 +35,6 @@ const ifBulletImpactMonster = (x, y) => {
 
 // 查找某小怪兽是否碰到飞机
 const ifMonsterImpacePlane = (x, y) => {
-    const MONSTERWIDTH = 15,
-        MONSTERHEIGHT = 30,
-        PLANEWIDTH = 30;
     // 小怪兽最下面大于飞机最上面，则可能相遇
     if (y + MONSTERHEIGHT > planeOffset.y) {
         //小怪兽最右边大于等于飞机最左边，并且小怪兽最左边小于等于飞机最右边，那么这俩个在x轴会相遇
@@ -79,17 +74,25 @@ const TOGGLE = {
     },
 }
 
-document.querySelector('#pause').onclick = function() {
+const PAUSEGAME = () => {
     pause = true;
     TOGGLE.showShade();
     TOGGLE.showLayer();
 }
 
-document.querySelector('#continue').onclick = function() {
+const CONTINUEGAME = () => {
     pause = false;
     TOGGLE.hideShade();
     TOGGLE.hideLayer();
     TOGGLE.hideGameover();
+}
+
+document.querySelector('#pause').onclick = function() {
+    PAUSEGAME();
+}
+
+document.querySelector('#continue').onclick = function() {
+    CONTINUEGAME();
 }
 
 // GAME OVER
@@ -99,3 +102,13 @@ const gameOver = () => {
     TOGGLE.showGameover();
     document.querySelector('#game_result').innerText = score;
 }
+
+// window 失去焦点 游戏暂停
+window.onblur = function() {
+    PAUSEGAME();
+};
+
+// window 获得焦点 
+/* window.onfocus = function() {
+    CONTINUEGAME();
+} */

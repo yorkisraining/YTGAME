@@ -16,34 +16,49 @@ body {
 /* plane */
 
 #plane {
-    width: 30px;
-    height: 30px;
-    background-color: #FF647E;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     position: absolute;
-    bottom: 5%;
+    bottom: 2%;
+    background-image: url(../img/doge.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 
 /* monster */
 
 .monster {
-    width: 15px;
-    height: 30px;
-    background-color: #014E5A;
+    width: 45px;
+    height: 45px;
     position: absolute;
+    background-image: url(../img/panda.gif);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 
 /* bullet */
 
 .bullet {
-    width: 8px;
+    width: 20px;
     height: 20px;
-    background-color: #F4DFA0;
     position: absolute;
-    border-radius: 10px;
+    background-image: url(../img/shit.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.bullet.animation {
+    animation: rollShit .5s infinite linear;
+}
+
+@keyframes rollShit {
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 

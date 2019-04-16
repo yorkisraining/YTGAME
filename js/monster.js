@@ -2,12 +2,6 @@ let monsterOffset = new Map(); //暴露的变量，小怪兽的坐标
 (function() {
     'use strict';
 
-    const CONTAINER = document.querySelector('#container'),
-        CONTAINERHEIGHT = CONTAINER.offsetHeight,
-        CONTAINERWIDTH = CONTAINER.offsetWidth,
-        MONSTERWIDTH = 15,
-        MONSTERHEIGHT = 30 + 5;
-
     /* 小怪兽移动方法 */
     let moveMonsterFn = (ele) => {
         const THISID = ele.getAttribute('data-id'),
@@ -22,29 +16,11 @@ let monsterOffset = new Map(); //暴露的变量，小怪兽的坐标
         })
 
         /* 超出屏幕清除掉那个小怪兽 */
-        /* let INTERTIMER = setInterval(() => {
-            if (!pause) {
-                if (monsterOffset.get(THISID)) {
-                    if (thisY < CONTAINERHEIGHT - MONSTERHEIGHT) {
-                        thisY += 5;
-                        ele.style.top = thisY + 'px';
-                        monsterOffset.get(THISID).y = thisY;
-                        ifMonsterImpacePlane(THISX, thisY);
-                    } else {
-                        clearInterval(INTERTIMER);
-                        CONTAINER.removeChild(ele);
-                        bulletOffset.delete(THISID);
-                    }
-                } else {
-                    clearInterval(INTERTIMER);
-                }
-            }
-        }, 50); */
         const INTERTIMERFN = () => {
             let INTERTIMER = setTimeout(() => {
                 if (!pause) {
                     if (monsterOffset.get(THISID)) {
-                        if (thisY < CONTAINERHEIGHT - MONSTERHEIGHT) {
+                        if (thisY < CONTAINERHEIGHT - MONSTERHEIGHT + 5) {
                             thisY += 5;
                             ele.style.top = thisY + 'px';
                             monsterOffset.get(THISID).y = thisY;
